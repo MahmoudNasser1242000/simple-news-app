@@ -2,10 +2,10 @@
 import { Text, View } from "react-native";
 
 // Styles
-import { styles as statesStyles } from "@/styles/allNews";
+import { styles as statesStyles } from "@/styles/base";
 
 // Types
-import { IQueryState } from '@/types'
+import { IQueryState } from '@/types';
 
 const QueryState = ({
     isLoading,

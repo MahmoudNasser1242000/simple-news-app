@@ -10,6 +10,8 @@ import type { IComment } from "@/types";
 
 // Services
 import newsApis from "@/services/newsApis";
+
+// Base Components
 import QueryState from "@/base/QueryState";
 
 const CommentCard = ({ postID }: { postID: number }) => {

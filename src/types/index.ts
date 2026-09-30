@@ -22,4 +22,10 @@ interface IQueryState {
     children: React.ReactNode;
 }
 
-export { IPost, IComment, IQueryState };
+interface IHeader {
+    eyebrow: string;
+    title: string;
+    description: string;
+}
+
+export { IPost, IComment, IQueryState, IHeader };

@@ -12,7 +12,7 @@ import type { IPost } from "@/types";
 import newsApis from "@/services/newsApis";
 
 // Components
-import CommentCard from "./CommentCard";
+import { CommentCard } from "@/components";
 import QueryState from "@/base/QueryState";
 
 export default function PostDetails({

@@ -1,10 +1,10 @@
 // Libs
+import { useEffect, useState, useTransition } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useEffect, useState, useTransition } from "react";
 
 // Styles
-import { styles } from "../styles/allNews";
+import { styles } from "../styles/base";
 
 // Types
 import type { IPost } from "../types";
@@ -13,9 +13,9 @@ import type { IPost } from "../types";
 import newsApis from "@/services/newsApis";
 
 // Components
-import NewsCard from "@/components/NewsCard";
-import PostDetails from "@/components/PostDetails";
+import { Header, NewsCard, PostDetails } from "@/components";
 import QueryState from "@/base/QueryState";
+
 
 export default function AllNews() {
   // Hooks
@@ -54,15 +54,11 @@ export default function AllNews() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.screen}>
         {/* Header */}
-        <View style={styles.fixedHeader}>
-          <View style={styles.hero}>
-            <Text style={styles.eyebrow}>Latest News Feed</Text>
-            <Text style={styles.title}>News App</Text>
-            <Text style={styles.description}>
-              All the latest news from around the world
-            </Text>
-          </View>
-        </View>
+        <Header
+          eyebrow="Latest News Feed"
+          title="News App"
+          description="All the latest news from around the world"
+        />
 
         {/* Scrollable Content */}
         <ScrollView
