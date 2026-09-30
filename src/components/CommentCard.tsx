@@ -4,13 +4,13 @@ import { useEffect, useState, useTransition } from "react";
 
 // Styles
 import { styles } from "@/styles/comments";
-import { styles as statesStyles } from "@/styles/allNews";
 
 // Types
 import type { IComment } from "@/types";
 
 // Services
 import newsApis from "@/services/newsApis";
+import QueryState from "@/base/QueryState";
 
 const CommentCard = ({ postID }: { postID: number }) => {
     // Hooks
@@ -34,19 +34,13 @@ const CommentCard = ({ postID }: { postID: number }) => {
     }, [postID]);
 
     return (
-        isCommentsLoading ? (
-            <View style={statesStyles.stateBox}>
-                <Text style={statesStyles.stateText}>Loading comments...</Text>
-            </View>
-        ) : error ? (
-            <View style={statesStyles.errorBox}>
-                <Text style={statesStyles.errorText}>Error: {error}</Text>
-            </View>
-        ) : comments.length === 0 ? (
-            <View style={statesStyles.stateBox}>
-                <Text style={statesStyles.stateText}>No comments found</Text>
-            </View>
-        ) : (
+        <QueryState
+            isLoading={isCommentsLoading}
+            error={error}
+            isEmpty={comments.length === 0}
+            loadingText="Loading Comments..."
+            emptyText="No Comments Found"
+        >
             <>
                 {/* comments header */}
                 <View style={styles.commentsHeader}>
@@ -66,7 +60,7 @@ const CommentCard = ({ postID }: { postID: number }) => {
                     }
                 </View>
             </>
-        )
+        </QueryState>
     )
 }
 

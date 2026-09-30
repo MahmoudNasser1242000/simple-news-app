@@ -15,6 +15,7 @@ import newsApis from "@/services/newsApis";
 // Components
 import NewsCard from "@/components/NewsCard";
 import PostDetails from "@/components/PostDetails";
+import QueryState from "@/base/QueryState";
 
 export default function AllNews() {
   // Hooks
@@ -68,20 +69,14 @@ export default function AllNews() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          {isNewsLoading ? (
-            <View style={styles.stateBox}>
-              <Text style={styles.stateText}>Loading posts...</Text>
-            </View>
-          ) : error ? (
-            <View style={styles.errorBox}>
-              <Text style={styles.errorText}>Error: {error}</Text>
-            </View>
-          ) : posts.length === 0 ? (
-            <View style={styles.stateBox}>
-              <Text style={styles.stateText}>No posts found</Text>
-            </View>
-          ) : (
-            selectedPostID ? (
+          <QueryState
+            isLoading={isNewsLoading}
+            error={error}
+            isEmpty={posts.length === 0}
+            loadingText="Loading Posts..."
+            emptyText="No Posts Found"
+          >
+            {selectedPostID ? (
               <PostDetails
                 postID={selectedPostID}
                 closePost={closePost}
@@ -89,15 +84,15 @@ export default function AllNews() {
             ) : (
               <View style={styles.list}>
                 {posts.map((post) => (
-                  <NewsCard 
+                  <NewsCard
                     key={post.id}
                     post={post}
                     openPost={openPost}
                   />
                 ))}
               </View>
-            )
-          )}
+            )}
+          </QueryState>
         </ScrollView>
       </View>
     </SafeAreaView>

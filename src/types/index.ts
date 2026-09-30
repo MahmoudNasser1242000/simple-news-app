@@ -13,4 +13,13 @@ interface IComment {
     body: string;
 }
 
-export { IPost, IComment };
+interface IQueryState {
+    isLoading: boolean;
+    loadingText?: string;
+    error: string | null;
+    isEmpty: boolean;
+    emptyText?: string;
+    children: React.ReactNode;
+}
+
+export { IPost, IComment, IQueryState };

@@ -4,7 +4,6 @@ import { useEffect, useState, useTransition } from "react";
 
 // Styles
 import { styles } from "@/styles/postDetails";
-import { styles as statesStyles } from "@/styles/allNews";
 
 // Types
 import type { IPost } from "@/types";
@@ -14,6 +13,7 @@ import newsApis from "@/services/newsApis";
 
 // Components
 import CommentCard from "./CommentCard";
+import QueryState from "@/base/QueryState";
 
 export default function PostDetails({
     postID,
@@ -43,15 +43,12 @@ export default function PostDetails({
     }, [postID]);
 
     return (
-        isDetailsLoading ? (
-            <View style={statesStyles.stateBox}>
-                <Text style={statesStyles.stateText}>Loading post details...</Text>
-            </View>
-        ) : error ? (
-            <View style={statesStyles.errorBox}>
-                <Text style={statesStyles.errorText}>Error: {error}</Text>
-            </View>
-        ) : (
+        <QueryState
+            isLoading={isDetailsLoading}
+            error={error}
+            isEmpty={false}
+            loadingText="Loading Post Details..."
+        >
             <View style={styles.detailsWrap}>
                 {/* back button */}
                 <Button
@@ -66,14 +63,14 @@ export default function PostDetails({
 
                 {/* post details cards */}
                 <View style={styles.detailsCard}>
-                    <Text style={styles.detailLabel}>Post# {post.id}</Text>
-                    <Text style={styles.detailTitle}>{post.title}</Text>
-                    <Text style={styles.detailBody}>{post.body}</Text>
+                    <Text style={styles.detailLabel}>Post# {post.id || "0"}</Text>
+                    <Text style={styles.detailTitle}>{post.title || "No Title"}</Text>
+                    <Text style={styles.detailBody}>{post.body || "No Body"}</Text>
                 </View>
 
                 {/* comments */}
                 <CommentCard postID={postID} />
             </View>
-        )
+        </QueryState>
     );
 }
