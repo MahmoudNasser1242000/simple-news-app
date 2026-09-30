@@ -14,6 +14,7 @@ import newsApis from "@/services/newsApis";
 
 // Components
 import NewsCard from "@/components/NewsCard";
+import PostDetails from "@/components/PostDetails";
 
 export default function AllNews() {
   // Hooks
@@ -80,15 +81,22 @@ export default function AllNews() {
               <Text style={styles.stateText}>No posts found</Text>
             </View>
           ) : (
-            <View style={styles.list}>
-              {posts.map((post) => (
-                <NewsCard 
-                  key={post.id}
-                  post={post}
-                  openPost={openPost}
-                />
-              ))}
-            </View>
+            selectedPostID ? (
+              <PostDetails
+                postID={selectedPostID}
+                closePost={closePost}
+              />
+            ) : (
+              <View style={styles.list}>
+                {posts.map((post) => (
+                  <NewsCard 
+                    key={post.id}
+                    post={post}
+                    openPost={openPost}
+                  />
+                ))}
+              </View>
+            )
           )}
         </ScrollView>
       </View>
