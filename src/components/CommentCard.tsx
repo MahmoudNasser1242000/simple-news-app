@@ -1,39 +1,18 @@
 // Libs
 import { Text, View } from "react-native";
-import { useEffect, useState, useTransition } from "react";
 
 // Styles
 import { styles } from "@/styles/comments";
 
-// Types
-import type { IComment } from "@/types";
-
-// Services
-import newsApis from "@/services/newsApis";
-
 // Base Components
 import QueryState from "@/base/QueryState";
 
-const CommentCard = ({ postID }: { postID: number }) => {
-    // Hooks
-    const [comments, setComments] = useState<IComment[]>([]);
-    const [error, setError] = useState<string>("");
-    const [isCommentsLoading, startTransition] = useTransition();
+// Hooks
+import { useComments } from "@/hooks";
 
-    // Fetch post comments
-    useEffect(() => {
-        const fetchComments = async () => {
-            startTransition(async () => {
-                try {
-                    const data = await newsApis.getPostComments(postID);
-                    setComments(data);
-                } catch (error: any) {
-                    setError(error.message);
-                }
-            });
-        };
-        fetchComments();
-    }, [postID]);
+const CommentCard = ({ postID }: { postID: number }) => {
+    // Custom Hooks
+    const { comments, error, isCommentsLoading } = useComments(postID);
 
     return (
         <QueryState

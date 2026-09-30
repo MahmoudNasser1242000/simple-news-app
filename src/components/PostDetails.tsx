@@ -1,19 +1,15 @@
 // Libs
 import { Text, View, Pressable as Button } from "react-native";
-import { useEffect, useState, useTransition } from "react";
 
 // Styles
 import { styles } from "@/styles/postDetails";
 
-// Types
-import type { IPost } from "@/types";
-
-// Services
-import newsApis from "@/services/newsApis";
-
 // Components
 import CommentCard from "./CommentCard";
 import QueryState from "@/base/QueryState";
+
+// Hooks
+import { usePostDetails } from "@/hooks";
 
 export default function PostDetails({
     postID,
@@ -22,25 +18,8 @@ export default function PostDetails({
     postID: number;
     closePost: () => void;
 }) {
-    // Hooks
-    const [post, setPost] = useState<IPost>({} as IPost);
-    const [error, setError] = useState<string>("");
-    const [isDetailsLoading, startTransition] = useTransition();
-
-    // Fetch post details and comments
-    useEffect(() => {
-        const fetchPostDetails = async () => {
-            startTransition(async () => {
-                try {
-                    const postData = await newsApis.getPostDetails(postID);
-                    setPost(postData);
-                } catch (error: any) {
-                    setError(error.message);
-                }
-            });
-        };
-        fetchPostDetails();
-    }, [postID]);
+    // Custom Hooks
+    const { post, error, isDetailsLoading } = usePostDetails(postID);
 
     return (
         <QueryState
