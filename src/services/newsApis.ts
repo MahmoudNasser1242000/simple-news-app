@@ -8,8 +8,11 @@ const getAllPosts = async () => {
         }
         const data = await response.json();
         return data;
-    } catch (error: { message: string } | any) {
-        throw error.message || "Failed to fetch all posts";
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw error;
+        }
+        throw new Error("Failed to fetch post details");
     }
 };
 
@@ -21,8 +24,11 @@ const getPostDetails = async (id: number) => {
         }
         const data = await response.json();
         return data;
-    } catch (error: { message: string } | any) {
-        throw error.message || "Failed to fetch post details";
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw error;
+        }
+        throw new Error("Failed to fetch post details");
     }
 };
 
@@ -34,8 +40,11 @@ const getPostComments = async (id: number) => {
         }
         const data = await response.json();
         return data;
-    } catch (error: { message: string } | any) {
-        throw error.message || "Failed to fetch post comments";
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            throw error;
+        }
+        throw new Error("Failed to fetch post details");
     }
 };
 
