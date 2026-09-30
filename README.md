@@ -1,56 +1,202 @@
-# Welcome to your Expo app 👋
+# 📰 News App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A simple and modern news feed mobile application built with **React Native**, **Expo**, **Expo Router**, and **TypeScript**.
 
-## Get started
+The application fetches posts from the [JSONPlaceholder](https://jsonplaceholder.cypress.io/) API and provides a clean interface for browsing posts, viewing post details, and reading comments.
 
-1. Install dependencies
+## ✨ Features
 
-   ```bash
-   npm install
-   ```
+- 📰 Browse the latest news-style posts
+- 📄 View post details
+- 💬 View comments for each post
+- 🔄 Loading states
+- ❌ Error handling
+- 📭 Empty states
+- 👆 Interactive post cards
+- 📱 Responsive mobile UI
+- 🧩 Reusable components
+- 🪝 Custom React hooks for data fetching
+- 🗂️ File-based routing with Expo Router
+- 🔷 Full TypeScript support
 
-2. Start the app
+## 🛠️ Tech Stack
 
-   ```bash
-   npx expo start
-   ```
+- **React Native** `0.86.3`
+- **Expo** `57`
+- **Expo Router** `57`
+- **React** `19`
+- **TypeScript**
+- **React Native Safe Area Context**
+- **Fetch API**
+- **JSONPlaceholder API**
 
-In the output, you'll find options to open the app in a
+## 🏗️ Architecture
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+The project follows a simple and reusable structure that separates UI components, hooks, services, types, and styles.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+src/
+├── app/
+│   ├── _layout.tsx
+│   └── index.tsx
+│
+├── base/
+│   └── QueryState.tsx
+│
+├── components/
+│   ├── Header.tsx
+│   ├── PostCard.tsx
+│   ├── PostDetails.tsx
+│   └── CommentCard.tsx
+│
+├── hooks/
+│   ├── usePosts.tsx
+│   ├── usePostDetails.tsx
+│   └── useComments.tsx
+│
+├── services/
+│   └── newsApis.ts
+│
+├── styles/
+│   ├── base.ts
+│   ├── newsCard.ts
+│   ├── postDetails.ts
+│   └── comments.ts
+│
+└── types/
+    └── index.ts
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Data Flow
 
-### Other setup steps
+```text
+Screen
+  │
+  ▼
+Custom Hook
+  │
+  ▼
+News API Service
+  │
+  ▼
+JSONPlaceholder API
+  │
+  ▼
+State
+  │
+  ▼
+UI Components
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+Responsible for:
 
-## Learn more
+- Fetching comments for a specific post
+- Managing comments state
+- Managing loading state
+- Managing errors
 
-To learn more about developing your project with Expo, look at the following resources:
+A reusable component for handling:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- Loading state
+- Error state
+- Empty state
+- Content state
 
-## Join the community
+## 🚀 Getting Started
 
-Join our community of developers creating universal apps.
+### Prerequisites
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Make sure you have the following installed:
+
+- Node.js
+- npm
+- Expo Go, Android Emulator, or iOS Simulator
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/MahmoudNasser1242000/simple-news-app.git
+```
+
+### 2. Navigate to the project
+
+```bash
+cd simple-news-app
+```
+
+### 3. Install dependencies
+
+```bash
+npm install
+```
+
+### 4. Start the development server
+
+```bash
+npx expo start
+```
+
+## 📱 Run on Android
+
+```bash
+npm run android
+```
+
+## 🍎 Run on iOS
+
+```bash
+npm run ios
+```
+
+## 🌐 Run on Web
+
+```bash
+npm run web
+```
+
+## 🧹 Lint
+
+```bash
+npm run lint
+```
+
+## 🔗 Path Aliases
+
+The project uses TypeScript path aliases for cleaner imports.
+
+```typescript
+import { Header, NewsCard, PostDetails } from "@/components";
+import { usePosts } from "@/hooks";
+```
+
+The `@` alias points to the `src` directory.
+
+## 📦 Project Scripts
+
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the Expo development server |
+| `npm run android` | Run the application on Android |
+| `npm run ios` | Run the application on iOS |
+| `npm run web` | Run the application on Web |
+| `npm run lint` | Run ESLint |
+| `npm run reset-project` | Reset the Expo starter project |
+
+## 🎯 Project Goals
+
+This project was built to practice and demonstrate:
+
+- React Native fundamentals
+- Expo Router
+- TypeScript
+- API integration
+- Custom React hooks
+- Component reusability
+- Error handling
+- Loading and empty states
+- Clean project organization
+- Mobile UI development
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
