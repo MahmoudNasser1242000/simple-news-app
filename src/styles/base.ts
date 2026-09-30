@@ -5,10 +5,11 @@ export const styles = StyleSheet.create({
     safeArea: {
         backgroundColor: '#f4f7fb',
         flex: 1,
+        marginTop: 20,
+
     },
     screen: {
         flex: 1,
-        marginTop: -10,
     },
 
     // Scroll Content Styles
