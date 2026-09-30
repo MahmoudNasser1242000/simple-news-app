@@ -4,12 +4,16 @@ import { useEffect, useState, useTransition } from "react";
 
 // Styles
 import { styles } from "@/styles/postDetails";
+import { styles as statesStyles } from "@/styles/allNews";
 
 // Types
 import type { IPost } from "@/types";
 
 // Services
 import newsApis from "@/services/newsApis";
+
+// Components
+import CommentCard from "./CommentCard";
 
 export default function PostDetails({
     postID,
@@ -40,12 +44,12 @@ export default function PostDetails({
 
     return (
         isDetailsLoading ? (
-            <View style={styles.stateBox}>
-                <Text style={styles.stateText}>Loading post details...</Text>
+            <View style={statesStyles.stateBox}>
+                <Text style={statesStyles.stateText}>Loading post details...</Text>
             </View>
         ) : error ? (
-            <View style={styles.errorBox}>
-                <Text style={styles.errorText}>Error: {error}</Text>
+            <View style={statesStyles.errorBox}>
+                <Text style={statesStyles.errorText}>Error: {error}</Text>
             </View>
         ) : (
             <View style={styles.detailsWrap}>
@@ -66,6 +70,9 @@ export default function PostDetails({
                     <Text style={styles.detailTitle}>{post.title}</Text>
                     <Text style={styles.detailBody}>{post.body}</Text>
                 </View>
+
+                {/* comments */}
+                <CommentCard postID={postID} />
             </View>
         )
     );
